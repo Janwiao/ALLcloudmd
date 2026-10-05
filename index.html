@@ -40,19 +40,49 @@ tr:last-child td{border-bottom:0}
 .legend span{background:#111e32;border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:#cdd8e8;font-size:.87rem}
 ul{padding-left:1.2rem}
 footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);font-size:.9rem}
-@media(max-width:950px){.grid{grid-template-columns:1fr 1fr}}
-@media(max-width:680px){.grid,.split{grid-template-columns:1fr}}
+.finder-shell{background:linear-gradient(180deg,#101c30,#0d1829);border:1px solid var(--line);border-radius:22px;padding:22px}
+.finder-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:16px}
+.finder-head p{margin:.35rem 0 0}
+.filter-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.need-btn{appearance:none;border:1px solid #2b4260;background:#101d31;color:#d9e4f4;border-radius:14px;padding:13px 14px;text-align:left;cursor:pointer;min-height:58px;font:inherit;transition:.15s ease}
+.need-btn:hover{border-color:#4d6f96}
+.need-btn.active{border-color:#7bc7ff;background:#14304a;color:#fff;box-shadow:inset 0 0 0 1px rgba(123,199,255,.25)}
+.need-btn strong{display:block;font-size:.95rem}
+.need-btn small{display:block;color:var(--muted);margin-top:2px;line-height:1.35}
+.need-btn.active small{color:#c8def0}
+.finder-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 6px}
+.finder-actions button{border:1px solid var(--line);background:#132238;color:var(--text);border-radius:10px;padding:9px 12px;cursor:pointer}
+.finder-actions button:hover{border-color:#4a678b}
+.result-note{color:var(--muted);font-size:.93rem;margin:12px 0}
+.result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.result-card{background:#0f1c30;border:1px solid var(--line);border-radius:16px;padding:17px;min-width:0}
+.result-card.top{border-color:#816b2b;background:linear-gradient(180deg,#1d2430,#111b2d)}
+.rank{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.result-title{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.result-title h3{margin:.2rem 0}
+.index{font-size:1.55rem;font-weight:800;color:var(--gold);white-space:nowrap}
+.bar{height:8px;background:#1b2a40;border-radius:999px;overflow:hidden;margin:10px 0 12px}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,#6ebcff,#f6c453);border-radius:inherit}
+.reason{font-size:.9rem;color:#c3d1e3;margin:.3rem 0 0}
+.all-results{margin-top:18px}
+.result-row{display:grid;grid-template-columns:170px 1fr 58px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(38,56,82,.65)}
+.result-row:last-child{border-bottom:0}
+.result-row .bar{margin:0}
+.method{margin-top:14px;padding:12px 14px;border-left:3px solid #3f668d;background:#0e1a2c;color:var(--muted);font-size:.9rem}
+@media(max-width:950px){.grid{grid-template-columns:1fr 1fr}.filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.result-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.grid,.split,.result-grid{grid-template-columns:1fr}.filter-grid{grid-template-columns:1fr}.finder-head{display:block}.result-row{grid-template-columns:105px 1fr 48px;gap:8px}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
 <div class="eyebrow">Cloud Storage Guide</div>
 <h1>雲端儲存與分享使用指南</h1>
-<p class="lead">從個人使用、團隊使用、頻繁修改、公開分享與大容量收藏五個方向，比較常見雲端服務，而不是只看容量大小。</p>
+<p class="lead">從個人使用、團隊使用、頻繁修改、公開分享與大容量收藏五個方向，比較常見雲端服務；也可以直接勾選需求，讓推薦器即時計算最適合的雲端指數。</p>
 <span class="updated">更新：2026-10-05</span>
 </div></header>
 
 <nav><div class="wrap">
+<a href="#finder">需求推薦</a>
 <a href="#quick">快速比較</a>
 <a href="#dimensions">評分方式</a>
 <a href="#edit">頻繁修改</a>
@@ -61,8 +91,50 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></nav>
 
 <main>
+
+<section id="finder"><div class="wrap">
+<h2>1. 快速需求推薦</h2>
+<div class="finder-shell">
+  <div class="finder-head">
+    <div>
+      <h3 style="margin:0">你現在想拿雲端做什麼？</h3>
+      <p class="muted">可複選。推薦器會依不同情境的適配度，計算每家服務的 0～100 推薦指數。</p>
+    </div>
+    <div class="score"><span id="selectedCount">尚未選擇需求</span></div>
+  </div>
+
+  <div class="filter-grid" id="needFilters">
+    <button type="button" class="need-btn" data-need="personal"><strong>個人日常</strong><small>文件、照片、跨裝置</small></button>
+    <button type="button" class="need-btn" data-need="team"><strong>團隊協作</strong><small>多人、權限、共同工作</small></button>
+    <button type="button" class="need-btn" data-need="edit"><strong>頻繁修改一般檔案</strong><small>Office、PSD、工作資料夾</small></button>
+    <button type="button" class="need-btn" data-need="archive"><strong>大容量收藏</strong><small>冷資料、歷史版本、數 TB</small></button>
+    <button type="button" class="need-btn" data-need="share"><strong>公開分享</strong><small>Discord、論壇、公開連結</small></button>
+    <button type="button" class="need-btn" data-need="code"><strong>程式碼開發</strong><small>Git、Branch、PR、Source</small></button>
+    <button type="button" class="need-btn" data-need="release"><strong>軟體／工具發布</strong><small>版本、Installer、Release</small></button>
+    <button type="button" class="need-btn" data-need="largepub"><strong>Client / Patch 大量下載</strong><small>大型檔案、網站、下載站</small></button>
+  </div>
+
+  <div class="finder-actions">
+    <button type="button" id="presetPersonal">個人收藏預設</button>
+    <button type="button" id="presetTeam">團隊工作預設</button>
+    <button type="button" id="presetCreator">創作者發布預設</button>
+    <button type="button" id="clearNeeds">清除</button>
+  </div>
+
+  <p class="result-note" id="resultNote">請至少選一個需求，系統會立即排序建議雲端。</p>
+
+  <div class="result-grid" id="topResults" aria-live="polite"></div>
+  <div class="all-results" id="allResults"></div>
+
+  <div class="method">
+    <strong>指數怎麼算？</strong>
+    每個需求都對各服務有 1～5 分適配度；將你勾選的需求取平均後換算成百分比。這是用途推薦指數，不代表速度實測、官方評分或價格 CP 值。
+  </div>
+</div>
+</div></section>
+
 <section id="quick"><div class="wrap">
-<h2>1. 同一張表看懂</h2>
+<h2>2. 同一張表看懂</h2>
 <div class="legend">
 <span>個人：自己保存與跨裝置</span>
 <span>團隊：多人協作與權限</span>
@@ -85,7 +157,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="dimensions"><div class="wrap">
-<h2>2. 五個評分面向</h2>
+<h2>3. 五個評分面向</h2>
 <div class="grid">
 <article class="card"><h3>個人使用</h3><p>自己上傳、下載、保存、搜尋、跨裝置與日常管理的方便程度。</p></article>
 <article class="card"><h3>團隊使用</h3><p>多人共同使用、權限、共同編輯、版本追蹤與協作流程。</p></article>
@@ -96,7 +168,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="edit"><div class="wrap">
-<h2>3. 頻繁修改：不是只有 Dropbox</h2>
+<h2>4. 頻繁修改：不是只有 Dropbox</h2>
 <div class="table-wrap"><table>
 <thead><tr><th>情境</th><th>Google Drive</th><th>Dropbox</th><th>pCloud</th><th>GitHub</th></tr></thead>
 <tbody>
@@ -117,7 +189,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section><div class="wrap">
-<h2>4. 容量與流量不是同一件事</h2>
+<h2>5. 容量與流量不是同一件事</h2>
 <div class="split">
 <div class="box"><h3>Storage</h3><p>倉庫有多大。只決定同時可以放多少資料。</p></div>
 <div class="box"><h3>Traffic / Egress</h3><p>資料搬進搬出、或別人下載時產生的傳輸量。</p></div>
@@ -126,7 +198,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="choose"><div class="wrap">
-<h2>5. 怎麼選？</h2>
+<h2>6. 怎麼選？</h2>
 <div class="grid">
 <article class="card"><h3>個人</h3><p><strong>Google Drive：</strong>文件與日常</p><p><strong>Dropbox：</strong>高頻同步</p><p><strong>pCloud：</strong>大容量收藏</p><p><strong>MEGA：</strong>中轉</p></article>
 <article class="card"><h3>團隊</h3><p><strong>Google Drive：</strong>文件共同編輯</p><p><strong>Dropbox：</strong>團隊檔案同步</p><p><strong>GitHub：</strong>程式開發</p><p><strong>R2：</strong>網站 / App 儲存後端</p></article>
@@ -135,7 +207,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="rules"><div class="wrap">
-<h2>6. 核心原則</h2>
+<h2>7. 核心原則</h2>
 <div class="grid">
 <article class="card"><h3>個人 ≠ 團隊</h3><p class="muted">自己好用，不代表多人權限與協作也強。</p></article>
 <article class="card"><h3>同步 ≠ 分享</h3><p class="muted">同步很強的服務，不一定適合大量公開下載。</p></article>
@@ -145,7 +217,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section><div class="wrap">
-<h2>7. 官方來源</h2>
+<h2>8. 官方來源</h2>
 <ul>
 <li><a href="https://help.pcloud.com/">pCloud Help Center</a></li>
 <li><a href="https://help.dropbox.com/">Dropbox Help</a></li>
@@ -159,5 +231,124 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 </main>
 <footer><div class="wrap">Public cloud storage reference · No personal account data included.</div></footer>
+
+<script>
+(function(){
+  var root = document.getElementById('finder');
+  if(!root || root.dataset.ready === '1') return;
+  root.dataset.ready = '1';
+
+  var needs = {
+    personal:{label:'個人日常'},
+    team:{label:'團隊協作'},
+    edit:{label:'頻繁修改一般檔案'},
+    archive:{label:'大容量收藏'},
+    share:{label:'公開分享'},
+    code:{label:'程式碼開發'},
+    release:{label:'軟體／工具發布'},
+    largepub:{label:'Client / Patch 大量下載'}
+  };
+
+  var services = [
+    {name:'Google Drive', scores:{personal:5,team:5,edit:5,archive:3,share:2,code:3,release:2,largepub:2}, best:'文件協作、日常跨裝置', notes:{personal:'日常與跨裝置很完整',team:'文件共同編輯很強',edit:'Mirror / Stream 都適合一般工作檔',archive:'可收藏但大量長期成本較高',share:'熱門公開檔案可能被限流',code:'能放專案檔但不是 Git 平台',release:'不適合當軟體發布平台',largepub:'不適合大型熱門下載站'}},
+    {name:'pCloud', scores:{personal:5,team:3,edit:4,archive:5,share:3,code:2,release:2,largepub:2}, best:'長期收藏、冷資料、總倉庫', notes:{personal:'個人網路硬碟體驗很好',team:'一般共享可用但協作不是主強項',edit:'使用 Sync 時一般工作檔表現不錯',archive:'Lifetime 與大容量收藏很有優勢',share:'有明確 Shared Link Traffic',code:'不建議拿同步雲端取代 Git',release:'不適合做正式版本發布平台',largepub:'公開大量下載會消耗分享流量'}},
+    {name:'Dropbox', scores:{personal:5,team:5,edit:5,archive:3,share:4,code:3,release:3,largepub:3}, best:'多裝置同步、團隊工作', notes:{personal:'個人同步成熟',team:'團隊檔案工作流程很強',edit:'高頻修改與多裝置同步是核心強項',archive:'可收藏但不是大容量冷資料最佳價格',share:'分享能力佳但有每日頻寬限制',code:'Source 可同步但 Git 仍應交給 GitHub',release:'能分享版本檔但不是專門 Release 平台',largepub:'大量公開下載仍不如 R2 類服務'}},
+    {name:'MEGA Free', scores:{personal:3,team:2,edit:3,archive:2,share:2,code:2,release:2,largepub:2}, best:'中轉、大檔臨時分享', notes:{personal:'一般存放可用',team:'Free 不適合長期團隊流程',edit:'桌面同步可用但不是最大優勢',archive:'免費容量與 Transfer 限制較明顯',share:'Free Transfer quota 會限制大型下載',code:'不是程式協作平台',release:'不適合正式版本發布',largepub:'持續大量下載容易碰 Transfer 限制'}},
+    {name:'MediaFire Free', scores:{personal:2,team:1,edit:1,archive:1,share:4,code:1,release:4,largepub:3}, best:'免費公開下載、小工具分享', notes:{personal:'私人雲端體驗不是主力',team:'幾乎不是團隊協作工具',edit:'不適合反覆同步工作檔',archive:'免費容量小',share:'廣告支援下載很適合公開分享',code:'不是 Source 管理工具',release:'小工具、MOD、ZIP 發布很方便',largepub:'能分享但大型正式下載仍有更好的平台'}},
+    {name:'GitHub', scores:{personal:3,team:5,edit:2,archive:1,share:5,code:5,release:5,largepub:2}, best:'程式開發、版本控制、軟體發布', notes:{personal:'對開發者個人專案很實用',team:'Branch / PR / Review 非常成熟',edit:'一般 Binary 工作資料夾不適合；Source Code 另計 5★',archive:'不是大型冷資料倉庫',share:'Releases 很適合公開發布',code:'Source Code 與 Git 工作流最佳',release:'Releases 是正式版本發布強項',largepub:'單一 asset 有大小限制，不適合大型 Client'}},
+    {name:'Cloudflare R2', scores:{personal:3,team:3,edit:2,archive:3,share:5,code:3,release:5,largepub:5}, best:'網站、Client、Patch、大流量下載', notes:{personal:'不是一般同步硬碟',team:'適合工程團隊當 Object Storage',edit:'頻繁小檔修改會增加 Operations',archive:'可存大量資料但按容量持續計費',share:'Internet egress 免費是核心優勢',code:'適合程式串接，不是 Source 版本控制',release:'非常適合承載正式發布檔',largepub:'大型 Client / Patch / 網站下載非常適合'}}
+  ];
+
+  var selected = new Set();
+  var buttons = Array.from(root.querySelectorAll('.need-btn'));
+  var topResults = root.querySelector('#topResults');
+  var allResults = root.querySelector('#allResults');
+  var resultNote = root.querySelector('#resultNote');
+  var selectedCount = root.querySelector('#selectedCount');
+
+  function pct(service){
+    if(selected.size === 0) return 0;
+    var total = 0;
+    selected.forEach(function(k){ total += service.scores[k] || 0; });
+    return Math.round((total / (selected.size * 5)) * 100);
+  }
+
+  function reasons(service){
+    return Array.from(selected)
+      .map(function(k){ return {key:k, score:service.scores[k] || 0, text:service.notes[k] || needs[k].label}; })
+      .sort(function(a,b){ return b.score-a.score; })
+      .slice(0,2)
+      .map(function(x){ return x.text; });
+  }
+
+  function render(){
+    buttons.forEach(function(btn){
+      btn.classList.toggle('active', selected.has(btn.dataset.need));
+      btn.setAttribute('aria-pressed', selected.has(btn.dataset.need) ? 'true' : 'false');
+    });
+
+    if(selected.size === 0){
+      selectedCount.textContent = '尚未選擇需求';
+      resultNote.textContent = '請至少選一個需求，系統會立即排序建議雲端。';
+      topResults.innerHTML = '';
+      allResults.innerHTML = '';
+      return;
+    }
+
+    selectedCount.textContent = '已選 ' + selected.size + ' 項需求';
+    var chosen = Array.from(selected).map(function(k){ return needs[k].label; }).join('、');
+    resultNote.textContent = '目前依「' + chosen + '」計算；分數越高代表越符合這組需求。';
+
+    var ranked = services.map(function(s){
+      return {service:s, index:pct(s), reasons:reasons(s)};
+    }).sort(function(a,b){
+      return b.index-a.index || a.service.name.localeCompare(b.service.name);
+    });
+
+    topResults.innerHTML = ranked.slice(0,3).map(function(item,i){
+      var r = item.reasons.join('；');
+      return '<article class="result-card ' + (i===0?'top':'') + '">' +
+        '<div class="rank">' + (i===0?'Top choice':'No. ' + (i+1)) + '</div>' +
+        '<div class="result-title"><h3>' + item.service.name + '</h3><div class="index">' + item.index + '</div></div>' +
+        '<div class="bar"><span style="width:' + item.index + '%"></span></div>' +
+        '<p><strong>' + item.service.best + '</strong></p>' +
+        '<p class="reason">' + r + '</p>' +
+      '</article>';
+    }).join('');
+
+    allResults.innerHTML =
+      '<h3 style="margin-bottom:8px">完整推薦指數</h3>' +
+      ranked.map(function(item){
+        return '<div class="result-row">' +
+          '<strong>' + item.service.name + '</strong>' +
+          '<div class="bar"><span style="width:' + item.index + '%"></span></div>' +
+          '<span class="stars" style="text-align:right">' + item.index + '</span>' +
+        '</div>';
+      }).join('');
+  }
+
+  buttons.forEach(function(btn){
+    btn.setAttribute('aria-pressed','false');
+    btn.addEventListener('click',function(){
+      var k = btn.dataset.need;
+      if(selected.has(k)) selected.delete(k); else selected.add(k);
+      render();
+    });
+  });
+
+  function setPreset(list){
+    selected = new Set(list);
+    render();
+  }
+
+  root.querySelector('#presetPersonal').addEventListener('click',function(){ setPreset(['personal','edit','archive']); });
+  root.querySelector('#presetTeam').addEventListener('click',function(){ setPreset(['team','edit']); });
+  root.querySelector('#presetCreator').addEventListener('click',function(){ setPreset(['personal','share','release','largepub']); });
+  root.querySelector('#clearNeeds').addEventListener('click',function(){ selected.clear(); render(); });
+
+  render();
+})();
+</script>
+
 </body>
 </html>
