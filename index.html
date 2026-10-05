@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="從個人使用與分享使用角度比較 Google Drive、pCloud、Dropbox、MEGA、MediaFire、GitHub Releases、Cloudflare R2">
+<title>雲端儲存與分享使用指南</title>
+<style>
+:root{--bg:#08111f;--panel:#111d31;--panel2:#16243a;--text:#eef5ff;--muted:#a9b7cc;--line:#263852;--accent:#7bc7ff;--good:#8be0bd;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#08111f,#0d1728 55%,#09111f);color:var(--text);font-family:Inter,"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.7}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:var(--max);margin:auto;padding:0 22px}
+header{padding:72px 0 44px;border-bottom:1px solid var(--line)}.eyebrow{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--good);font-weight:800}
+h1{font-size:clamp(2rem,5vw,4rem);line-height:1.08;margin:.45rem 0 1rem}.lead{max-width:860px;color:var(--muted);font-size:1.08rem}
+.updated{display:inline-block;margin-top:14px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;background:rgba(8,17,31,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:18px;overflow:auto;padding-top:11px;padding-bottom:11px;white-space:nowrap}nav a{color:#d0dbea;font-size:.93rem}
+section{padding:48px 0}h2{font-size:clamp(1.55rem,3vw,2.25rem);margin:0 0 18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:20px}
+.scores{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.scores span{padding:5px 9px;border-radius:999px;background:#10253b;border:1px solid #244361;font-size:.84rem}
+.muted{color:var(--muted)}.callout{background:#10253a;border:1px solid #275177;border-radius:18px;padding:18px 20px;margin:18px 0}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{background:#172640}tr:last-child td{border-bottom:0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}.box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
+ul{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);font-size:.9rem}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:680px){.grid,.split{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="eyebrow">Cloud Storage Guide</div>
+<h1>雲端儲存與分享使用指南</h1>
+<p class="lead">不只看容量。真正重要的是：自己用好不好用？分享給別人下載好不好用？這頁從個人使用、公開分享、大容量收藏三個角度比較常見服務。</p>
+<span class="updated">更新：2026-10-05</span>
+</div></header>
+
+<nav><div class="wrap">
+<a href="#quick">快速結論</a><a href="#concept">個人 vs 分享</a><a href="#services">服務評分</a><a href="#details">逐家分析</a><a href="#choose">怎麼選</a><a href="#rules">核心原則</a>
+</div></nav>
+
+<main>
+<section id="quick"><div class="wrap">
+<h2>1. 快速結論</h2>
+<div class="grid">
+<article class="card"><h3>Google Drive</h3><div class="scores"><span>個人 ★★★★★</span><span>分享 ★★</span><span>收藏 ★★★</span></div><p><strong>建議：</strong>日常文件、照片、跨裝置。</p><p class="muted">個人使用很強；大量公開分享較弱。</p></article>
+<article class="card"><h3>pCloud</h3><div class="scores"><span>個人 ★★★★★</span><span>分享 ★★★</span><span>收藏 ★★★★★</span></div><p><strong>建議：</strong>長期收藏、冷資料、總倉庫。</p><p class="muted">非常適合私人總倉庫；公開分享有流量額度。</p></article>
+<article class="card"><h3>Dropbox</h3><div class="scores"><span>個人 ★★★★★</span><span>分享 ★★★★</span><span>收藏 ★★★</span></div><p><strong>建議：</strong>工作同步、多裝置、團隊協作。</p><p class="muted">同步與協作很強；分享有每日頻寬。</p></article>
+<article class="card"><h3>MEGA Free</h3><div class="scores"><span>個人 ★★★</span><span>分享 ★★</span><span>收藏 ★★</span></div><p><strong>建議：</strong>中轉、大檔臨時分享。</p><p class="muted">Free Transfer quota 是最大限制。</p></article>
+<article class="card"><h3>MediaFire Free</h3><div class="scores"><span>個人 ★★</span><span>分享 ★★★★</span><span>收藏 ★</span></div><p><strong>建議：</strong>免費公開下載。</p><p class="muted">不適合私人總倉庫，但分享小檔很好用。</p></article>
+<article class="card"><h3>GitHub Releases</h3><div class="scores"><span>個人 ★★</span><span>分享 ★★★★★</span><span>收藏 ★</span></div><p><strong>建議：</strong>程式、工具、版本發布。</p><p class="muted">適合軟體發布，不是私人雲端。</p></article>
+<article class="card"><h3>Cloudflare R2</h3><div class="scores"><span>個人 ★★★</span><span>分享 ★★★★★</span><span>收藏 ★★★</span></div><p><strong>建議：</strong>網站、Client、Patch、大流量下載。</p><p class="muted">分享與大流量發布很強，但不是一般同步硬碟。</p></article>
+</div>
+</div></section>
+
+<section id="concept"><div class="wrap">
+<h2>2. 個人使用 vs 分享使用</h2>
+<div class="split">
+<div class="box"><h3>個人使用</h3><p>自己上傳、下載、跨裝置、同步、長期保存。重點是 Storage、桌面同步、Online-only、Stream、Virtual Drive、長期價格。</p></div>
+<div class="box"><h3>分享使用</h3><p>把連結給朋友、論壇、Discord 或網站使用者下載。重點是 Shared Link Traffic、Bandwidth、Egress、每日／每月限制，以及熱門檔案會不會被暫停。</p></div>
+</div>
+<div class="callout"><strong>例：</strong>10GB 檔案只占 10GB Storage；自己抓 3 次是 30GB 傳輸；1,000 人各下載一次則約產生 10TB 分享／出站流量。</div>
+</div></section>
+
+<section id="services"><div class="wrap">
+<h2>3. 同一張表看懂</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>服務</th><th>個人使用</th><th>分享使用</th><th>大容量收藏</th><th>建議用途</th><th>主要弱點</th></tr></thead>
+<tbody>
+<tr><td>Google Drive</td><td>★★★★★</td><td>★★</td><td>★★★</td><td>日常文件、照片、跨裝置</td><td>熱門公開檔案可能被限流</td></tr>
+<tr><td>pCloud</td><td>★★★★★</td><td>★★★</td><td>★★★★★</td><td>長期收藏、冷資料、總倉庫</td><td>公開分享有流量額度</td></tr>
+<tr><td>Dropbox</td><td>★★★★★</td><td>★★★★</td><td>★★★</td><td>工作同步、多裝置、協作</td><td>分享有每日頻寬限制</td></tr>
+<tr><td>MEGA Free</td><td>★★★</td><td>★★</td><td>★★</td><td>中轉、大檔臨時分享</td><td>Free Transfer quota</td></tr>
+<tr><td>MediaFire Free</td><td>★★</td><td>★★★★</td><td>★</td><td>免費公開下載</td><td>容量小、廣告下載頁</td></tr>
+<tr><td>GitHub Releases</td><td>★★</td><td>★★★★★</td><td>★</td><td>工具、程式、版本發布</td><td>不是私人雲端硬碟</td></tr>
+<tr><td>Cloudflare R2</td><td>★★★</td><td>★★★★★</td><td>★★★</td><td>網站、Client、Patch、大流量下載</td><td>需要 Object Storage 管理概念</td></tr>
+</tbody></table></div>
+</div></section>
+
+<section id="details"><div class="wrap">
+<h2>4. 逐家分析</h2>
+<div class="grid">
+<article class="card"><h3>Google Drive</h3><p><strong>個人：</strong>★★★★★　<strong>分享：</strong>★★</p><p>Google 生態、文件協作、Stream / Mirror 都很成熟。</p><p class="muted">適合自己用與少量分享；熱門大型公開檔案可能被暫時限流。</p></article>
+<article class="card"><h3>pCloud</h3><p><strong>個人：</strong>★★★★★　<strong>分享：</strong>★★★</p><p>Lifetime、虛擬磁碟、冷資料收藏是最大優勢。</p><p class="muted">適合當私人總倉庫；公開分享要注意 Shared Link Traffic。</p></article>
+<article class="card"><h3>Dropbox</h3><p><strong>個人：</strong>★★★★★　<strong>分享：</strong>★★★★</p><p>同步、多裝置與團隊協作體驗成熟。</p><p class="muted">Basic 約 20GB/日分享；多數付費方案約 1TB/日；高階商務可到 4TB/日。</p></article>
+<article class="card"><h3>MEGA Free</h3><p><strong>個人：</strong>★★★　<strong>分享：</strong>★★</p><p>隱私與大型檔案中轉方便。</p><p class="muted">Free Transfer quota 會限制持續大量下載，不宜當熱門下載站。</p></article>
+<article class="card"><h3>MediaFire Free</h3><p><strong>個人：</strong>★★　<strong>分享：</strong>★★★★</p><p>傳統免費公開分享仍很有優勢。</p><p class="muted">免費容量小、下載頁有廣告；適合 MOD、補丁、小工具、ZIP。</p></article>
+<article class="card"><h3>GitHub Releases</h3><p><strong>個人：</strong>★★　<strong>分享：</strong>★★★★★</p><p>非常適合工具與軟體版本發布。</p><p class="muted">每個 asset 小於 2GiB；Release 總大小與 bandwidth usage 官方標示無上限。</p></article>
+<article class="card"><h3>Cloudflare R2</h3><p><strong>個人：</strong>★★★　<strong>分享：</strong>★★★★★</p><p>Object Storage，Internet egress 免費。</p><p class="muted">適合 Client、Patch、網站大型檔案；仍需計算 Storage 與 Operations。</p></article>
+</div>
+</div></section>
+
+<section id="choose"><div class="wrap">
+<h2>5. 怎麼選？</h2>
+<div class="split">
+<div class="box"><h3>重點是自己用</h3><ul>
+<li>文件、PDF、照片：<strong>Google Drive</strong></li>
+<li>多台電腦同步工作：<strong>Dropbox</strong></li>
+<li>大容量長期收藏：<strong>pCloud</strong></li>
+<li>臨時中轉：<strong>MEGA</strong></li>
+</ul></div>
+<div class="box"><h3>重點是給別人下載</h3><ul>
+<li>工具／程式版本：<strong>GitHub Releases</strong></li>
+<li>免費分享小檔：<strong>MediaFire</strong></li>
+<li>Client／Patch／網站大型下載：<strong>Cloudflare R2</strong></li>
+<li>偶爾分享私人檔案：<strong>pCloud / Dropbox / Google Drive</strong></li>
+</ul></div>
+</div>
+</div></section>
+
+<section id="rules"><div class="wrap">
+<h2>6. 核心原則</h2>
+<div class="grid">
+<article class="card"><h3>Storage ≠ Traffic</h3><p class="muted">容量大，不代表分享頻寬也大。</p></article>
+<article class="card"><h3>同步雲端 ≠ CDN</h3><p class="muted">Google Drive、Dropbox 很會同步，不代表適合熱門下載站。</p></article>
+<article class="card"><h3>收藏 ≠ 發布</h3><p class="muted">冷資料適合 pCloud；大量公開下載更適合 Releases / R2。</p></article>
+<article class="card"><h3>重要資料至少兩份</h3><p class="muted">任何單一雲端都不該成為唯一備份。</p></article>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<h2>7. 官方來源</h2>
+<ul>
+<li><a href="https://help.pcloud.com/">pCloud Help Center</a></li>
+<li><a href="https://help.dropbox.com/">Dropbox Help</a></li>
+<li><a href="https://support.google.com/drive/">Google Drive Help</a></li>
+<li><a href="https://help.mega.io/">MEGA Help</a></li>
+<li><a href="https://www.mediafire.com/">MediaFire</a></li>
+<li><a href="https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases">GitHub Releases</a></li>
+<li><a href="https://developers.cloudflare.com/r2/">Cloudflare R2</a></li>
+</ul>
+<p class="muted">各服務方案與流量限制可能隨時間調整，實際 Pricing、Help Center、Dashboard 顯示值優先。</p>
+</div></section>
+</main>
+
+<footer><div class="wrap">Public cloud storage reference · No personal account data included.</div></footer>
+</body>
+</html>
