@@ -42,6 +42,89 @@
 
 ---
 
+
+## 雲端名詞字典
+
+### 先記住：Sync 不等於 Backup
+
+- **Sync（同步）**：讓本機與雲端保持一致。通常是雙向，任一端修改都可能反映到另一端；刪除也可能被同步。
+- **Backup（備份）**：核心是保留可恢復副本。不同服務對刪除、版本歷史、保留時間的規則不同，不能只看名字判斷。
+- **Online-only（僅線上）**：檔案看得到，但完整內容主要在雲端；真正開啟時才下載。
+- **Available offline（離線可用）**：雲端與本機都有完整副本，沒有網路也能使用。
+- **Cache（快取）**：為加速存取而暫存在本機的資料，不應視為正式備份。
+- **Shared Link / Public Link**：給別人下載或存取的分享網址。
+- **Transfer Quota / Bandwidth**：一定時間內能傳多少資料的額度。
+- **Version History / Rewind**：保留舊版本或讓檔案／帳戶回到先前狀態。
+
+### Google Drive
+
+| 名詞 | 白話意思 |
+|---|---|
+| **Drive for desktop** | Google 的 Windows / macOS 桌面程式 |
+| **Stream files** | 檔案主要在雲端，本機按需下載與快取，省硬碟 |
+| **Mirror files** | 雲端與本機都保留完整副本，永遠可離線，但占硬碟 |
+| **Shared drives** | Google Workspace 的團隊共用空間，資料屬於團隊而不是單一成員 |
+
+Google 官方指出，高頻寫入、影片剪輯、高解析圖片工作通常 Mirror 會更快。
+
+### pCloud
+
+| 名詞 | 白話意思 |
+|---|---|
+| **pCloud Drive** | 虛擬雲端磁碟；主要資料在雲端，需要才抓 |
+| **pCloud Sync** | 指定本機資料夾與 pCloud 資料夾做雙向同步 |
+| **pCloud Backup** | 持續將指定本機資料夾更新到 pCloud；仍需注意刪除與版本保留規則 |
+| **Crypto Folder** | pCloud 的額外加密資料區域 |
+
+### Dropbox
+
+| 名詞 | 白話意思 |
+|---|---|
+| **Online-only** | 只存在雲端，開啟時下載 |
+| **Available offline** | 本機也保留完整副本 |
+| **Selective Sync** | 決定哪些 Dropbox 資料夾要出現在這台電腦 |
+| **File Request** | 建立收件入口，讓別人上傳檔案給你 |
+
+### MEGA
+
+| 名詞 | 白話意思 |
+|---|---|
+| **Transfer quota** | 下載／串流會消耗的傳輸額度 |
+| **Sync** | 本機與 MEGA 資料夾同步 |
+| **Backup** | 偏向保護本機資料夾的備份工作流，實際保留規則仍看服務設定 |
+
+### GitHub
+
+| 名詞 | 白話意思 |
+|---|---|
+| **Repository / Repo** | Git 專案儲存庫 |
+| **Commit** | 一次版本變更紀錄 |
+| **Branch** | 獨立開發線 |
+| **Pull Request / PR** | 提出合併變更並進行 Review |
+| **Release** | 正式版本發布頁 |
+| **Asset** | Release 底下的 ZIP / EXE / Installer 附件 |
+| **Git LFS** | Git Large File Storage，大型檔案的專門儲存機制 |
+
+### Cloudflare R2
+
+| 名詞 | 白話意思 |
+|---|---|
+| **Bucket** | 存放 Objects 的最上層容器 |
+| **Object** | 真正儲存的一份檔案／資料 |
+| **Key** | Object 的唯一名稱；畫面中的資料夾多半只是 prefix 視覺分組 |
+| **Egress** | 從 R2 傳到 Internet 的出站流量 |
+| **Public Bucket** | 允許 Internet 公開讀取的 Bucket |
+| **Presigned URL** | 有期限、有限權限的私人 Object 存取網址 |
+| **S3-compatible** | 可使用大量 S3 SDK / CLI / 工具 |
+| **Storage Class** | Standard / Infrequent Access 等儲存類別 |
+| **Class A / B Operations** | R2 API 操作的計費分類 |
+
+### MediaFire
+
+- **Ad-supported download**：免費分享時，下載者透過有廣告的 MediaFire 頁面取得檔案。
+
+---
+
 ## 1. 五個評分面向怎麼看？
 
 ### 個人使用
