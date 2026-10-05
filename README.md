@@ -1,6 +1,6 @@
 # 雲端儲存與分享使用指南
 
-> 更新日期：2026-10-05  
+> 更新日期：2026-10-06  
 > 本文以 **個人使用、團隊使用、頻繁修改、公開分享、大容量收藏** 五個面向，快速比較常見雲端服務。  
 > 評分為用途定位分析，不是服務商官方評分；實際方案、價格與流量限制以官方最新資訊為準。
 
@@ -122,6 +122,117 @@ Google 官方指出，高頻寫入、影片剪輯、高解析圖片工作通常 
 ### MediaFire
 
 - **Ad-supported download**：免費分享時，下載者透過有廣告的 MediaFire 頁面取得檔案。
+
+---
+
+
+## 方案與價格
+
+> 更新：2026-10-06。不同國家、稅金、付款方式與促銷會造成差異；以下保留各服務原始計價幣別，實際結帳頁優先。
+
+### 計費模式快速看
+
+| 服務 | 主要計費方式 |
+|---|---|
+| Google One | 月 / 年訂閱 |
+| pCloud | 月 / 年訂閱 + Lifetime 一次買斷 |
+| Dropbox | 個人訂閱；團隊方案多為每使用者計價 |
+| MEGA | 月 / 年訂閱 |
+| MediaFire | 免費 + 月 / 年訂閱 |
+| GitHub | Free / Team / Enterprise，每人計價 + 額外用量 |
+| Cloudflare R2 | 儲存量 + API Operations 按量計費 |
+
+### Google One / Google Drive
+
+| 方案 | 容量 | 公開價格參考 |
+|---|---:|---:|
+| 免費 | 15GB | US$0 |
+| Basic | 100GB | US$1.99 / 月 |
+| Standard | 200GB | 依地區 / 帳戶方案頁顯示 |
+| Premium | 2TB | US$9.99 / 月（全球公開參考） |
+
+> Google One 年繳方案官方標示最高可省約 16%；台灣與其他地區實際價格以帳戶內方案頁為準。
+
+### pCloud
+
+**常態價**
+
+| 容量 | 年繳 | Lifetime |
+|---|---:|---:|
+| 500GB | US$49.99 / 年 | US$219 |
+| 2TB | US$99.99 / 年 | US$499 |
+| 10TB | US$299.99 / 年 | US$1,499 |
+
+**2026 中秋活動（至 2026/10/7）**
+
+| 容量 | Lifetime 活動價 | 特典 |
+|---|---:|---|
+| 1TB | US$279 | pCloud Encryption |
+| 2TB | US$379 | pCloud Encryption |
+| 10TB | US$1,099 | pCloud Encryption |
+
+### Dropbox
+
+| 方案 | 容量 | 價格 |
+|---|---:|---:|
+| Basic | 2GB | 免費 |
+| Plus | 2TB | US$9.99 / 月 |
+| Standard | 團隊至少 3TB | US$15 / 使用者 / 月 |
+| Advanced | 團隊起始 15TB | US$24 / 使用者 / 月 |
+
+> 月繳 / 年繳切換會影響 Dropbox 頁面顯示價格。
+
+### MEGA
+
+> MEGA 2026 年方案容量曾調整，並會受地區 / VAT 影響；以下以 2026 公開價格頁快照為參考，結帳頁優先。
+
+| 方案 | 容量 | 月費參考 |
+|---|---:|---:|
+| Free | 20GB | €0 |
+| Pro Lite | 約 750GB | 約 €4.99 / 月 |
+| Pro I | 3TB | €9.99 / 月 |
+| Pro II | 10TB | €19.99 / 月 |
+| Pro III | 20TB | €29.99 / 月 |
+
+### MediaFire
+
+| 方案 | 容量 | 價格 |
+|---|---:|---:|
+| Basic | 10GB | 免費 / 廣告支援下載 |
+| Pro | 1TB | US$5.83 / 月（年繳折算） |
+| Pro 月繳 | 1TB | 約 US$9.99 / 月，促銷可能變動 |
+| Ultra | 100GB | US$10 / 月 |
+
+### GitHub
+
+| 方案 | 價格 | 定位 |
+|---|---:|---|
+| Free | US$0 | 個人 / 組織基本功能 |
+| Team | US$4 / 使用者 / 月 | 團隊協作 |
+| Enterprise | US$21 / 使用者 / 月起 | 企業治理 / 合規 |
+
+> Actions、Codespaces、Packages、Git LFS 等超出內含額度時可能另外計費。
+
+### Cloudflare R2
+
+| 項目 | 價格 |
+|---|---:|
+| Standard Storage | US$0.015 / GB-month |
+| Infrequent Access Storage | US$0.01 / GB-month |
+| IA Retrieval | US$0.01 / GB |
+| Class A Operations | US$4.50 / 百萬次 |
+| Class B Operations | US$0.36 / 百萬次 |
+| Internet Egress | 免費 |
+
+Standard 免費層每月包含：10GB-month Storage、100 萬次 Class A、1,000 萬次 Class B。
+
+只算 Standard Storage、扣掉 10GB 免費額度時：
+
+- 1TB：約 US$14.85 / 月
+- 5TB：約 US$74.85 / 月
+- 10TB：約 US$149.85 / 月
+
+> 上述未計入 Operations。
 
 ---
 
