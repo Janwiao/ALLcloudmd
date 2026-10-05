@@ -69,6 +69,23 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 .result-row:last-child{border-bottom:0}
 .result-row .bar{margin:0}
 .method{margin-top:14px;padding:12px 14px;border-left:3px solid #3f668d;background:#0e1a2c;color:var(--muted);font-size:.9rem}
+.glossary-group{margin-top:22px}
+.glossary-group>h3{margin-bottom:10px}
+.term-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.term{background:#0f1c30;border:1px solid var(--line);border-radius:15px;padding:16px;min-width:0}
+.term h4{margin:0 0 5px;font-size:1rem}
+.term .term-en{color:var(--gold);font-weight:700;font-size:.85rem;margin-left:5px}
+.term p{margin:.35rem 0;color:#c9d6e7}
+.term .when{color:var(--muted);font-size:.9rem}
+.term-warning{border-color:#725b2b;background:#191d25}
+.term-brand{display:inline-block;font-size:.76rem;padding:2px 7px;border-radius:999px;background:#172942;border:1px solid #294565;color:#bad9f4;margin-bottom:8px}
+details.term{padding:0;overflow:hidden}
+details.term summary{cursor:pointer;padding:15px 16px;list-style:none;font-weight:700}
+details.term summary::-webkit-details-marker{display:none}
+details.term summary::after{content:"＋";float:right;color:var(--muted)}
+details.term[open] summary::after{content:"－"}
+details.term .term-body{padding:0 16px 15px}
+@media(max-width:800px){.term-grid{grid-template-columns:1fr}}
 @media(max-width:950px){.grid{grid-template-columns:1fr 1fr}.filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.result-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.grid,.split,.result-grid{grid-template-columns:1fr}.filter-grid{grid-template-columns:1fr}.finder-head{display:block}.result-row{grid-template-columns:105px 1fr 48px;gap:8px}}
 </style>
@@ -83,6 +100,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 
 <nav><div class="wrap">
 <a href="#finder">需求推薦</a>
+<a href="#glossary">名詞字典</a>
 <a href="#quick">快速比較</a>
 <a href="#dimensions">評分方式</a>
 <a href="#edit">頻繁修改</a>
@@ -133,8 +151,177 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div>
 </div></section>
 
+
+<section id="glossary"><div class="wrap">
+<h2>2. 雲端名詞字典</h2>
+<p class="muted">不同服務常用不同名稱描述很接近、但不完全相同的功能。先看通用概念，再看各家自己的術語。</p>
+
+<div class="callout term-warning">
+  <strong>先記最重要的一句：Sync（同步）不等於 Backup（備份）。</strong><br>
+  Sync 的目標是「兩邊保持一致」，因此修改甚至刪除都有可能同步到另一端；Backup 的核心目標則是保留可恢復的副本。實際刪除與保留規則仍要看各家服務。
+</div>
+
+<div class="glossary-group">
+<h3>通用名詞</h3>
+<div class="term-grid">
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Sync <span class="term-en">同步</span></h4>
+    <p>把本機資料夾和雲端資料夾連在一起，讓兩邊保持最新。多數桌面 Sync 是雙向：電腦改檔會上傳；雲端改檔也會回到電腦。</p>
+    <p class="when"><strong>什麼時候用：</strong>每天工作的文件、圖片、專案資料夾，需要多台裝置保持一致時。</p>
+  </article>
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Backup <span class="term-en">備份</span></h4>
+    <p>重點是「發生誤刪、硬碟故障、檔案損毀時還能恢復」。它不一定要像 Sync 一樣讓兩邊隨時完全相同。</p>
+    <p class="when"><strong>注意：</strong>各家叫做 Backup 的行為不同，例如是否同步刪除、保留多久、是否有版本歷史，都要另看規則。</p>
+  </article>
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Online-only <span class="term-en">僅線上</span></h4>
+    <p>檔案在檔案總管裡看得到，但完整內容主要放在雲端，不長期占本機空間；真正打開時才下載。</p>
+    <p class="when"><strong>適合：</strong>雲端容量比電腦硬碟大很多，想「看得到全部、需要才抓」。</p>
+  </article>
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Available offline <span class="term-en">離線可用</span></h4>
+    <p>雲端有一份，本機也保留完整副本。沒有網路仍能開啟；重新連線後再把變更同步上去。</p>
+    <p class="when"><strong>代價：</strong>會占用本機硬碟容量。</p>
+  </article>
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Cache <span class="term-en">快取</span></h4>
+    <p>為了讓常用雲端檔案開得更快，程式暫時留在本機的資料。Cache 通常可被系統清掉，不能把它當正式離線副本。</p>
+  </article>
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Shared Link / Public Link <span class="term-en">分享連結</span></h4>
+    <p>產生網址給別人讀取或下載。別人下載造成的流量常會另外計入 Shared Traffic / Bandwidth。</p>
+  </article>
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Transfer Quota / Bandwidth <span class="term-en">傳輸額度</span></h4>
+    <p>限制一定時間內能傳多少資料。它可以和 Storage 完全不同：有 1TB 空間，不代表有 1TB 或無限下載流量。</p>
+  </article>
+  <article class="term">
+    <span class="term-brand">通用</span>
+    <h4>Version history / Rewind <span class="term-en">版本歷史／回溯</span></h4>
+    <p>保留檔案先前版本或讓整個帳戶／資料夾回到較早時間點。這是誤覆蓋、勒索軟體、批次誤刪時很重要的功能。</p>
+  </article>
+</div>
+</div>
+
+<div class="glossary-group">
+<h3>Google Drive 常見名詞</h3>
+<div class="term-grid">
+  <details class="term" open><summary>Stream files｜串流檔案</summary><div class="term-body">
+    <p>Google Drive for desktop 的模式。檔案主要存在雲端，本機只在使用時下載並使用快取，因此很省硬碟空間。</p>
+    <p class="when">適合可靠網路環境與「雲端很多、本機空間有限」的情境。</p>
+  </div></details>
+  <details class="term"><summary>Mirror files｜鏡像檔案</summary><div class="term-body">
+    <p>雲端與本機各保留完整副本，所以檔案一直可離線使用，也會占用本機硬碟。</p>
+    <p class="when">Google 官方特別指出，高頻寫入、影片剪輯、高解析圖片編輯等工作通常使用 Mirror 會更快。</p>
+  </div></details>
+  <details class="term"><summary>Drive for desktop</summary><div class="term-body">
+    <p>Google 在 Windows / macOS 上的桌面程式，用來把 Google Drive 整合進檔案總管 / Finder，並提供 Stream、Mirror 等功能。</p>
+  </div></details>
+  <details class="term"><summary>Shared drives｜共用雲端硬碟</summary><div class="term-body">
+    <p>Google Workspace 團隊功能。檔案屬於團隊空間，而不是單一成員個人帳號；適合公司、組織長期共同管理資料。</p>
+  </div></details>
+</div>
+</div>
+
+<div class="glossary-group">
+<h3>pCloud 常見名詞</h3>
+<div class="term-grid">
+  <details class="term" open><summary>pCloud Drive｜虛擬磁碟</summary><div class="term-body">
+    <p>在電腦建立一個虛擬雲端磁碟。檔案主要在 pCloud，預設不需要完整占用本機空間，需要時再讀取。</p>
+    <p class="when">它比較像「雲端總倉庫入口」，不是把整個雲端完整複製到硬碟。</p>
+  </div></details>
+  <details class="term" open><summary>pCloud Sync｜同步</summary><div class="term-body">
+    <p>把你指定的本機資料夾和 pCloud 內某個資料夾綁在一起，進行雙向同步：任何一端修改，都會反映到另一端。</p>
+    <p class="when">如果你要頻繁修改本機工作資料夾，應該看 Sync，而不是只把檔案放在虛擬 P: 磁碟。</p>
+  </div></details>
+  <details class="term"><summary>pCloud Backup｜備份</summary><div class="term-body">
+    <p>選定桌面、文件、圖片等本機資料夾，自動持續上傳並更新到 pCloud。它和傳統「永不跟著刪」的離線備份不完全相同，因此仍要注意刪除與垃圾桶／版本保留規則。</p>
+  </div></details>
+  <details class="term"><summary>Crypto Folder</summary><div class="term-body">
+    <p>pCloud 的加密資料夾概念，用來存放需要額外私密保護的內容。它和一般 pCloud Drive 區域的使用方式不同。</p>
+  </div></details>
+</div>
+</div>
+
+<div class="glossary-group">
+<h3>Dropbox 常見名詞</h3>
+<div class="term-grid">
+  <details class="term" open><summary>Online-only｜僅供線上存取</summary><div class="term-body">
+    <p>檔案顯示在 Dropbox 資料夾中，但完整內容放在雲端、不長期占本機空間。開啟時會自動下載。</p>
+  </div></details>
+  <details class="term"><summary>Available offline｜離線存取</summary><div class="term-body">
+    <p>本機與 Dropbox 都有完整副本；沒網路也能打開。離線修改後，恢復連線時 Dropbox 會再同步。</p>
+  </div></details>
+  <details class="term"><summary>Selective Sync｜選擇性同步</summary><div class="term-body">
+    <p>選擇哪些 Dropbox 資料夾要出現在這台電腦。適合公司或大帳號中有很多資料，但單一電腦只需要其中一部分。</p>
+  </div></details>
+  <details class="term"><summary>File Request｜檔案請求</summary><div class="term-body">
+    <p>建立一個收件入口，讓別人把檔案上傳給你。用途和「我分享檔案給別人下載」相反。</p>
+  </div></details>
+</div>
+</div>
+
+<div class="glossary-group">
+<h3>MEGA 常見名詞</h3>
+<div class="term-grid">
+  <details class="term" open><summary>Transfer quota｜傳輸配額</summary><div class="term-body">
+    <p>MEGA 對下載與串流使用的傳輸額度。Free 帳戶最常遇到「空間還有，但 Transfer quota 先用完」。</p>
+  </div></details>
+  <details class="term"><summary>Sync</summary><div class="term-body">
+    <p>MEGA Desktop 的資料夾同步功能，把本機與 MEGA 雲端資料保持一致。概念上和其他服務的 Sync 類似。</p>
+  </div></details>
+  <details class="term"><summary>Backup</summary><div class="term-body">
+    <p>偏向保護本機資料夾的備份工作流。不要只因為名稱叫 Backup 就假設它一定是永久、不可刪除的歷史封存；仍需看 MEGA 當下版本保留與刪除規則。</p>
+  </div></details>
+</div>
+</div>
+
+<div class="glossary-group">
+<h3>GitHub 常見名詞</h3>
+<div class="term-grid">
+  <details class="term"><summary>Repository / Repo｜儲存庫</summary><div class="term-body"><p>一個 Git 專案的容器，包含程式碼、歷史紀錄與協作資訊。</p></div></details>
+  <details class="term"><summary>Commit｜提交</summary><div class="term-body"><p>把某一批變更記錄成一個版本節點，方便追蹤「改了什麼、何時改、誰改」。</p></div></details>
+  <details class="term"><summary>Branch｜分支</summary><div class="term-body"><p>從主要版本分出另一條開發線，讓新功能或實驗不必直接破壞 main。</p></div></details>
+  <details class="term"><summary>Pull Request / PR</summary><div class="term-body"><p>請求把某個 Branch 的變更合併進另一個 Branch，並讓團隊進行 Review、討論與檢查。</p></div></details>
+  <details class="term"><summary>Release｜版本發布</summary><div class="term-body"><p>把某個正式版本整理成發布頁，通常搭配版本號、說明與下載檔。</p></div></details>
+  <details class="term"><summary>Asset｜發布附件</summary><div class="term-body"><p>掛在 Release 底下讓使用者下載的 ZIP、EXE、Installer 等檔案。</p></div></details>
+  <details class="term"><summary>Git LFS</summary><div class="term-body"><p>Git Large File Storage。把大型二進位檔從一般 Git 歷史中抽離，用指標檔搭配專門儲存，避免 Repo 因大型檔案快速膨脹。</p></div></details>
+</div>
+</div>
+
+<div class="glossary-group">
+<h3>Cloudflare R2 常見名詞</h3>
+<div class="term-grid">
+  <details class="term" open><summary>Bucket｜儲存桶</summary><div class="term-body"><p>R2 裡存放 Objects 的最上層容器，可以把它想成一個大倉庫。</p></div></details>
+  <details class="term"><summary>Object｜物件</summary><div class="term-body"><p>R2 裡真正儲存的一份檔案／資料，例如一張圖片、一個 ZIP、一個 Client 安裝包。</p></div></details>
+  <details class="term"><summary>Key｜物件鍵</summary><div class="term-body"><p>Object 的唯一名稱，例如 <code>patch/2026/client.zip</code>。R2 本質是平面結構，畫面看到的資料夾其實多半是 Key prefix 的視覺分組。</p></div></details>
+  <details class="term"><summary>Egress｜出站流量</summary><div class="term-body"><p>R2 把資料送到 Internet 的流量。R2 的重要特色就是 Internet Egress 不另外收費。</p></div></details>
+  <details class="term"><summary>Public Bucket｜公開 Bucket</summary><div class="term-body"><p>把 Bucket 的內容公開給 Internet 存取。正式環境通常會搭配自己的 Custom Domain。</p></div></details>
+  <details class="term"><summary>Presigned URL｜預簽名網址</summary><div class="term-body"><p>替私人 Object 產生「限時、限定操作」的網址，例如只允許某人 1 小時內下載，而不需要把 API 金鑰交出去。</p></div></details>
+  <details class="term"><summary>S3-compatible｜相容 S3</summary><div class="term-body"><p>R2 支援 Amazon S3 風格的 API，因此很多原本支援 S3 的 SDK、CLI、rclone 工具只要更換 Endpoint 就能使用。</p></div></details>
+  <details class="term"><summary>Storage Class｜儲存類別</summary><div class="term-body"><p>R2 目前有 Standard 與 Infrequent Access 等類別，用不同的儲存費、最低保存時間與 Retrieval 費交換成本。</p></div></details>
+  <details class="term"><summary>Class A / Class B Operations</summary><div class="term-body"><p>R2 對不同 API 操作類型的計費分類。簡單理解：除了「放多少 GB」，大量建立、列出、讀取 Object 也可能產生成本。</p></div></details>
+</div>
+</div>
+
+<div class="glossary-group">
+<h3>MediaFire 常見名詞</h3>
+<div class="term-grid">
+  <details class="term"><summary>Ad-supported download｜廣告支援下載</summary><div class="term-body"><p>免費使用者分享檔案時，下載者通常會先進 MediaFire 的下載頁，由廣告支撐免費頻寬模式。</p></div></details>
+</div>
+</div>
+</div></section>
+
 <section id="quick"><div class="wrap">
-<h2>2. 同一張表看懂</h2>
+<h2>3. 同一張表看懂</h2>
 <div class="legend">
 <span>個人：自己保存與跨裝置</span>
 <span>團隊：多人協作與權限</span>
@@ -157,7 +344,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="dimensions"><div class="wrap">
-<h2>3. 五個評分面向</h2>
+<h2>4. 五個評分面向</h2>
 <div class="grid">
 <article class="card"><h3>個人使用</h3><p>自己上傳、下載、保存、搜尋、跨裝置與日常管理的方便程度。</p></article>
 <article class="card"><h3>團隊使用</h3><p>多人共同使用、權限、共同編輯、版本追蹤與協作流程。</p></article>
@@ -168,7 +355,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="edit"><div class="wrap">
-<h2>4. 頻繁修改：不是只有 Dropbox</h2>
+<h2>5. 頻繁修改：不是只有 Dropbox</h2>
 <div class="table-wrap"><table>
 <thead><tr><th>情境</th><th>Google Drive</th><th>Dropbox</th><th>pCloud</th><th>GitHub</th></tr></thead>
 <tbody>
@@ -189,7 +376,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section><div class="wrap">
-<h2>5. 容量與流量不是同一件事</h2>
+<h2>6. 容量與流量不是同一件事</h2>
 <div class="split">
 <div class="box"><h3>Storage</h3><p>倉庫有多大。只決定同時可以放多少資料。</p></div>
 <div class="box"><h3>Traffic / Egress</h3><p>資料搬進搬出、或別人下載時產生的傳輸量。</p></div>
@@ -198,7 +385,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="choose"><div class="wrap">
-<h2>6. 怎麼選？</h2>
+<h2>7. 怎麼選？</h2>
 <div class="grid">
 <article class="card"><h3>個人</h3><p><strong>Google Drive：</strong>文件與日常</p><p><strong>Dropbox：</strong>高頻同步</p><p><strong>pCloud：</strong>大容量收藏</p><p><strong>MEGA：</strong>中轉</p></article>
 <article class="card"><h3>團隊</h3><p><strong>Google Drive：</strong>文件共同編輯</p><p><strong>Dropbox：</strong>團隊檔案同步</p><p><strong>GitHub：</strong>程式開發</p><p><strong>R2：</strong>網站 / App 儲存後端</p></article>
@@ -207,7 +394,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section id="rules"><div class="wrap">
-<h2>7. 核心原則</h2>
+<h2>8. 核心原則</h2>
 <div class="grid">
 <article class="card"><h3>個人 ≠ 團隊</h3><p class="muted">自己好用，不代表多人權限與協作也強。</p></article>
 <article class="card"><h3>同步 ≠ 分享</h3><p class="muted">同步很強的服務，不一定適合大量公開下載。</p></article>
@@ -217,7 +404,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--muted);f
 </div></section>
 
 <section><div class="wrap">
-<h2>8. 官方來源</h2>
+<h2>9. 官方來源</h2>
 <ul>
 <li><a href="https://help.pcloud.com/">pCloud Help Center</a></li>
 <li><a href="https://help.dropbox.com/">Dropbox Help</a></li>
